@@ -18,6 +18,7 @@ module.exports = {
       age,
       sex,
       vote_for,
+      location_coordinates,
       consider_other_option,
       happy_with_current_gov,
       local_mla_critic,
