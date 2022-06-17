@@ -7,6 +7,8 @@ module.exports = {
     return jwt.sign(
       {
         id: user.id,
+        uuid: user.uuid,
+        phone: user.phone,
         email: user.email,
         name: user.name,
       },

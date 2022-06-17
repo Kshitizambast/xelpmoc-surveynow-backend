@@ -2,6 +2,7 @@ const { Sequelize } = require('sequelize');
 const process = require('dotenv').config();
 const surveyerModel = require('./models/surveyer');
 const surveyDataModel = require('./models/surveydata');
+const surveyerCollection = require('./models/surveyercollection');
 const questionModel = require('./models/question');
 
 
@@ -17,6 +18,7 @@ const models = {
     Surveyer: surveyerModel(sequelize, Sequelize.DataTypes),
     SurveyData: surveyDataModel(sequelize, Sequelize.DataTypes),
     Question:  questionModel(sequelize, Sequelize.DataTypes),
+    SurveyerCollection: surveyerCollection(sequelize, Sequelize.DataTypes)
 }
 
 module.exports = sequelize;

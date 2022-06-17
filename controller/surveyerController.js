@@ -11,7 +11,7 @@ module.exports = {
     res.send("surveyerController");
   },
   surveyerCreate: async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, phone } = req.body;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
@@ -28,6 +28,7 @@ module.exports = {
             uuid: _uuid,
             name,
             email,
+            phone,
             password: hash,
           })
             .then((surveyer) => {

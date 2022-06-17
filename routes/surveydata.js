@@ -21,7 +21,7 @@ const upload = multer({
       cb(null, { fieldName: file.fieldname });
     },
     key: function (req, file, cb) {
-      cb(null, `${_uuid}/test_audio_${file.originalname}`);
+      cb(null, `${_uuid}/${file.originalname}`);
     },
   }),
 });
@@ -33,7 +33,7 @@ router.use(cors());
 router.post(
   "/upload",
   authMiddleware.autherizeUser(),
-  upload.array("audio", 2),
+  upload.array("audio", 10),
   (req, res) => {
     uploadSurveyData.upload(req, res);
   }
