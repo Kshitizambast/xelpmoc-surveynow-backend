@@ -10,7 +10,7 @@ const root = require('./routes/index')
 require('dotenv').config()
 
 
-const PORT =  5000 || process.env.PORT 
+const PORT =  5001 || process.env.PORT 
 const app = express()
 
 app.use('/v1/api', root)
