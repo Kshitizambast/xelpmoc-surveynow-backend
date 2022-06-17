@@ -8,8 +8,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      questionJSON: {
-        type: Sequelize.JSON
+      question: {
+        type: Sequelize.STRING
+      },
+      answer_type: {
+        type: Sequelize.STRING
+      },
+      alias: {
+        type: Sequelize.STRING
+      },
+      option_one: {
+        type: Sequelize.STRING
+      },
+      option_two: {
+        type: Sequelize.STRING
+      },
+      option_three: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
