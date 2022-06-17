@@ -13,27 +13,34 @@ module.exports = (sequelize, DataTypes) => {
   }
   SurveyData.init(
     {
+      // question_id: DataTypes.INTEGER,
       uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-      },
-      surveyer_id: DataTypes.STRING,
-      participant_data_recording_url: DataTypes.STRING,
       location_coordinates: DataTypes.STRING,
-      participant_review_recording_url: DataTypes.STRING,
-      question_one_answer: DataTypes.STRING,
-      question_two_answer: DataTypes.STRING,
+      name: DataTypes.STRING,
+      age: DataTypes.STRING,
+      sex: DataTypes.STRING,
+      vote_for: DataTypes.STRING,
+      reason_behind_selection: DataTypes.STRING,
+      consider_other_option: DataTypes.STRING,
+      reason_behind_other_option: DataTypes.STRING,
+      happy_with_current_gov: DataTypes.STRING,
+      reason_behind_feedback: DataTypes.STRING,
+      JMR_critic: DataTypes.STRING,
+      CBN_critic: DataTypes.STRING,
+      NL_critic: DataTypes.STRING,
+      local_mla_critic: DataTypes.STRING,
+      reason_behind_mla_critic: DataTypes.STRING,
+      choose_next_mla: DataTypes.STRING,
+      influenced_by: DataTypes.STRING,
+      expectations_from_next_gov: DataTypes.STRING,
+      message_for_politicians: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: "SurveyData",
-      tableName: "survey_data",
     }
   );
   return SurveyData;
