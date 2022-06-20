@@ -14,4 +14,8 @@ router.get("/all", authMiddleware.autherizeUser(), (req, res) => {
   questionController.getQuestions(req, res);
 });
 
+router.post("/create", authMiddleware.autherizeUser(), (req, res) => {
+  questionController.createQuestion(req, res);
+});
+
 module.exports = router;

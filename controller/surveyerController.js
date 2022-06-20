@@ -1,6 +1,8 @@
 const sequelize = require("../database");
 const bcrypt = require("bcrypt");
+const _ = require("lodash");
 const uuid = require("uuid");
+const validation = require("../validation/surveyerValidation");
 
 // import { generateToken } from '../utils/jwtUtils'
 
@@ -12,6 +14,18 @@ module.exports = {
   },
   surveyerCreate: async (req, res) => {
     const { name, email, password, phone } = req.body;
+    const { error, isValid } = validation.surveyerSignupValidation(
+      email,
+      phone,
+      name,
+      password
+    );
+    if (!isValid) {
+     
+      return res.status(400).json({
+        error,
+      });
+    }
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
@@ -51,6 +65,17 @@ module.exports = {
   surveyerLogin: async (req, res) => {
     const { email, password } = req.body;
 
+    const { error, isValid } = validation.surveyerLoginValidation(
+      email,
+      password
+    );
+    if (!isValid) {
+      
+      return res.status(400).json({
+        error,
+      });
+    }
+
     await sequelize.models.Surveyer.findOne({ where: { email } })
       .then((surveyer) => {
         if (surveyer) {
@@ -77,4 +102,11 @@ module.exports = {
         });
       });
   },
+
+  surveyerLogout: async (req, res) => {
+
+    res.status(200).json({
+      message: "Logged out successfully",
+    });
+  }
 };
