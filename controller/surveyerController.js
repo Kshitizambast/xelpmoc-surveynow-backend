@@ -21,7 +21,6 @@ module.exports = {
       password
     );
     if (!isValid) {
-     
       return res.status(400).json({
         error,
       });
@@ -69,8 +68,8 @@ module.exports = {
       email,
       password
     );
+
     if (!isValid) {
-      
       return res.status(400).json({
         error,
       });
@@ -104,9 +103,8 @@ module.exports = {
   },
 
   surveyerLogout: async (req, res) => {
-
     res.status(200).json({
       message: "Logged out successfully",
     });
-  }
+  },
 };

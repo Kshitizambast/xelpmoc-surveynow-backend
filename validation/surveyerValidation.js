@@ -26,7 +26,7 @@ module.exports = {
    
   },
 
-  surveyerLoginValidation: async (email, password) => {
+  surveyerLoginValidation:  (email, password) => {
     let errors = {};
     if (!email || !password) {
         errors.fieldEmpty = "All fields are required";
@@ -34,7 +34,7 @@ module.exports = {
     if (!validator.isEmail(email)) {
         errors.email = "Please enter a valid email";
     }
-    if (!validator.isPassword(password)) {
+    if (!validator.isString(password)) {
         errors.password = "Please enter a valid password";
     }
     return {
