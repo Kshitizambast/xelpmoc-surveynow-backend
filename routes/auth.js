@@ -19,5 +19,8 @@ router.post("/signup", (req, res) => {
 router.post("/login", (req, res) => {
   surveyerController.surveyerLogin(req, res);
 });
+router.post("/logout", (req, res) => {
+  surveyerController.surveyerLogout(req, res);
+});
 
 module.exports = router;
