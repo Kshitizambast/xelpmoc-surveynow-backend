@@ -48,72 +48,54 @@ module.exports = {
     } = req.body;
 
     // console.log(req.body);
-
-    await sequelize.models.SurveyData.findOne({
-      where: {
-        uuid: uuid,
-      },
+    await sequelize.models.SurveyData.create({
+      uuid,
+      name,
+      age,
+      sex,
+      vote_for,
+      location_coordinates,
+      reason_behind_selection,
+      consider_other_option,
+      reason_behind_other_option,
+      happy_with_current_gov,
+      reason_behind_feedback,
+      JMR_critic,
+      CBN_critic,
+      NL_critic,
+      local_mla_critic,
+      reason_behind_mla_critic,
+      choose_next_mla,
+      influenced_by,
+      expectations_from_next_gov,
+      message_for_politicians,
     })
-      .then(async (surveyData) => {
-        if (surveyData) {
-          res.status(400).json({
-            message: "Survey data already exists",
-          });
-        } else {
-          await sequelize.models.SurveyData.create({
-            uuid,
-            name,
-            age,
-            sex,
-            vote_for,
-            location_coordinates,
-            reason_behind_selection,
-            consider_other_option,
-            reason_behind_other_option,
-            happy_with_current_gov,
-            reason_behind_feedback,
-            JMR_critic,
-            CBN_critic,
-            NL_critic,
-            local_mla_critic,
-            reason_behind_mla_critic,
-            choose_next_mla,
-            influenced_by,
-            expectations_from_next_gov,
-            message_for_politicians,
-          })
-            .then(async (surveyData) => {
-              const collection_uuid = globalUuid.v4();
-              await sequelize.models.SurveyerCollection.create({
-                uuid: collection_uuid,
-                survey_data_uuid: surveyData.uuid,
-                surveyer_uuid: req.user.uuid,
-              })
-                .then((surveyerCollection) => {
-                  res.status(200).json({
-                    surveyData,
-                    surveyerCollection,
-                  });
-                })
-                .catch((err) => {
-                  res.status(500).json({
-                    error: err,
-                    message: "Error creating surveyer collection",
-                  });
-                });
-            })
-            .catch((err) => {
-              res.status(500).json({
-                error: err,
-                message: "Error creating survey data",
-              });
+      .then(async (_surveyData) => {
+        const collection_uuid = globalUuid.v4();
+        await sequelize.models.SurveyerCollection.create({
+          uuid: collection_uuid,
+          survey_data_uuid: _surveyData.uuid,
+          surveyer_uuid: req.user.uuid,
+        })
+          .then((surveyerCollection) => {
+            res.status(200).json({
+              surveyData: _surveyData,
+              surveyerCollection,
             });
-        }
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).json({
+              error: err,
+              message: "Error creating surveyer collection",
+            });
+          });
       })
       .catch((err) => {
+        console.log(err);
         res.status(500).json({
-          error: err,
-          message: "Try again later",
+          error: `${err}`,
+          message: "Error creating survey data",
         });
       });
   },
